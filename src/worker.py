@@ -5,12 +5,9 @@ from .pile import Pile
 
 
 class Worker:
-    def __init__(self,
-                 speed: int = 3,
-                 precision: float = None  # a number between 0 and 1
-                 ):
+    def __init__(self, speed: int, precision: float):
         self.speed = speed
-        self.precision = rd.random() if precision is None else precision
+        self.precision = precision
         self.task_pile = Pile()
 
     def execute_task(self, task: Task) -> Task:
@@ -26,7 +23,7 @@ class Worker:
     def get_new_tasks(self, task_count: int) -> None:
         self.task_pile.generate_new_tasks(task_count)
 
-    def work(self, task_count: int = 5) -> list[Task]:
+    def work(self) -> list[Task]:
         tasks = self.task_pile.get_tasks(self.speed)
         tasks = [self.execute_task(task) for task in tasks]
 
