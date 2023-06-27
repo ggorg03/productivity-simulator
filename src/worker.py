@@ -1,7 +1,7 @@
 import random as rd
 
 from .task import Task
-from .pilha_tarefas import PilhaTarefas
+from .pile import Pile
 
 
 class Worker:
@@ -11,7 +11,7 @@ class Worker:
                  ):
         self.speed = speed
         self.precision = rd.random() if precision is None else precision
-        self.task_pile = PilhaTarefas()
+        self.task_pile = Pile()
 
     def execute_task(self, task: Task) -> Task:
         task.tries += 1
@@ -24,16 +24,16 @@ class Worker:
         return task
 
     def get_new_tasks(self, task_count: int) -> None:
-        self.task_pile.gerar_novas_tarefas(task_count)
+        self.task_pile.generate_new_tasks(task_count)
 
     def work(self, task_count: int = 5) -> list[Task]:
-        tasks = self.task_pile.pegar_tarefas(self.speed)
+        tasks = self.task_pile.get_tasks(self.speed)
         tasks = [self.execute_task(task) for task in tasks]
 
         completed_tasks = [task for task in tasks if task.is_completed]
         failed_tasks = [task for task in tasks if not task.is_completed]
 
-        self.task_pile.adicionar_tarefas(failed_tasks)
+        self.task_pile.add_tasks(failed_tasks)
 
         return completed_tasks
 
