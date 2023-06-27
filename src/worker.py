@@ -1,5 +1,3 @@
-import random as rd
-
 from .task import Task
 from .pile import Pile
 
