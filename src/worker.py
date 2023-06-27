@@ -14,11 +14,12 @@ class Worker:
         self.task_pile = PilhaTarefas()
 
     def execute_task(self, task: Task) -> Task:
-        task.tryes += 1
-        if (task.dificulty <= self.precision):
-            task.is_finished = True
+        task.tries += 1
+
+        if task.difficulty <= self.precision:
+            task.is_completed = True
         else:
-            task.reset_dificulty()
+            task.reset_difficulty()
 
         return task
 
@@ -29,8 +30,8 @@ class Worker:
         tasks = self.task_pile.pegar_tarefas(self.speed)
         tasks = [self.execute_task(task) for task in tasks]
 
-        completed_tasks = [task for task in tasks if task.is_finished]
-        failed_tasks = [task for task in tasks if not task.is_finished]
+        completed_tasks = [task for task in tasks if task.is_completed]
+        failed_tasks = [task for task in tasks if not task.is_completed]
 
         self.task_pile.adicionar_tarefas(failed_tasks)
 
