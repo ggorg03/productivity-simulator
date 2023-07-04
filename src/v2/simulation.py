@@ -4,8 +4,8 @@ from .worker import Worker
 
 def run():
     workers = [
-        Worker(0),
-        Worker(1)
+        Worker(0, 0.5),
+        Worker(1, 0.5)
     ]
 
     tasks = [
