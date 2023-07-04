@@ -3,7 +3,7 @@ from .worker import Worker
 
 
 class Simulation:
-    def __init(self):
+    def __init__(self):
         self.workers = [
             Worker(0, 0.5),
             Worker(1, 0.5)
