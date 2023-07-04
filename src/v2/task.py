@@ -6,10 +6,10 @@ class Task:
     def __init__(self):
         self.state_by_stage = dict()
 
-    def set_stage_state(self, stage_id, state):
+    def set_state(self, stage_id, state):
         self.state_by_stage[stage_id] = state
 
-    def get_stage_state(self, stage_id):
+    def get_state(self, stage_id):
         return self.state_by_stage[stage_id]
 
     def __repr__(self):

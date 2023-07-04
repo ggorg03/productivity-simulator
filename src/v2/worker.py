@@ -9,7 +9,7 @@ class Worker:
         self.precision = precision
 
     def work(self, task: Task) -> None:
-        task.set_stage_state(self.stage_id, self._get_work_output())
+        task.set_state(self.stage_id, self._get_work_output())
 
     def _get_work_output(self):
         if random.random() < self.precision:

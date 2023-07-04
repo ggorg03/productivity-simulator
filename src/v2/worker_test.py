@@ -17,7 +17,7 @@ class WorkerTest(unittest.TestCase):
 
         worker.work(task)
 
-        self.assertEqual(task.get_stage_state(0), Task.COMPLETED)
+        self.assertEqual(task.get_state(0), Task.COMPLETED)
 
     def test_work_sets_multiple_stage_states(self):
         first_worker = Worker(0, precision=1)
@@ -28,8 +28,8 @@ class WorkerTest(unittest.TestCase):
         first_worker.work(task)
         second_worker.work(task)
 
-        self.assertEqual(task.get_stage_state(0), Task.COMPLETED)
-        self.assertEqual(task.get_stage_state(1), Task.COMPLETED)
+        self.assertEqual(task.get_state(0), Task.COMPLETED)
+        self.assertEqual(task.get_state(1), Task.COMPLETED)
 
     def test_work_sets_failed_state(self):
         worker = Worker(0, precision=0.3)
@@ -38,7 +38,7 @@ class WorkerTest(unittest.TestCase):
 
         worker.work(task)
 
-        self.assertEqual(task.get_stage_state(0), Task.FAILED)
+        self.assertEqual(task.get_state(0), Task.FAILED)
 
 
 if __name__ == '__main__':
