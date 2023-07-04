@@ -9,9 +9,9 @@ class Worker:
         self.precision = precision
 
     def work(self, task: Task) -> None:
-        task.set_stage_state(self.stage_id, self.get_work_output())
+        task.set_stage_state(self.stage_id, self._get_work_output())
 
-    def get_work_output(self):
+    def _get_work_output(self):
         if random.random() < self.precision:
             return Task.COMPLETED
         else:
