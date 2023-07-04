@@ -16,7 +16,10 @@ class Simulation:
 
     def run(self):
         for task in self.tasks:
-            for worker in self.workers:
-                worker.work(task)
+            self._process_task(task)
 
         print(self.tasks)
+
+    def _process_task(self, task):
+        for worker in self.workers:
+            worker.work(task)
