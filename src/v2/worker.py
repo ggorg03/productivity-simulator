@@ -4,7 +4,7 @@ from .task import Task
 
 
 class Worker:
-    def __init__(self, stage_id, precision):
+    def __init__(self, stage_id, precision: float):
         self.stage_id = stage_id
         self.precision = precision
 
