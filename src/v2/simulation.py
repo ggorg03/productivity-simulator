@@ -2,19 +2,21 @@ from .task import Task
 from .worker import Worker
 
 
-def run():
-    workers = [
-        Worker(0, 0.5),
-        Worker(1, 0.5)
-    ]
+class Simulation:
+    def __init(self):
+        self.workers = [
+            Worker(0, 0.5),
+            Worker(1, 0.5)
+        ]
 
-    tasks = [
-        Task(),
-        Task()
-    ]
+        self.tasks = [
+            Task(),
+            Task()
+        ]
 
-    for task in tasks:
-        for worker in workers:
-            worker.work(task)
+    def run(self):
+        for task in self.tasks:
+            for worker in self.workers:
+                worker.work(task)
 
-    print(tasks)
+        print(self.tasks)
