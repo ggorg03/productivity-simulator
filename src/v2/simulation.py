@@ -22,4 +22,4 @@ class Simulation:
 
     def _process_task(self, task):
         for worker in self.workers:
-            worker.work(task)
+            worker._work(task)
