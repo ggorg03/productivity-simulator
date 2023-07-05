@@ -29,6 +29,16 @@ class TaskPileTest(unittest.TestCase):
         self.assertEqual(pile.get(), task1)
         self.assertEqual(pile.get(), task2)
 
+    def test_put_many(self):
+        pile = TaskPile()
+        task1 = Task()
+        task2 = Task()
+
+        pile.put(task1, task2)
+
+        self.assertEqual(pile.get(), task1)
+        self.assertEqual(pile.get(), task2)
+
 
 if __name__ == '__main__':
     unittest.main()

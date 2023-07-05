@@ -7,11 +7,14 @@ class TaskPile:
     def __init__(self):
         self.tasks = collections.deque()
 
-    def put(self, task: Task) -> None:
-        self.tasks.append(task)
+    def put(self, *tasks: Task) -> None:
+        self.tasks.extend(tasks)
 
     def get(self) -> Task | None:
         try:
             return self.tasks.popleft()
         except IndexError:
             return None
+
+    def __iter__(self):
+        return iter(self.tasks)

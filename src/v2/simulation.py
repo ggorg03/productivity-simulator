@@ -1,25 +1,27 @@
+from .pile import TaskPile
 from .task import Task
 from .worker import Worker
 
 
 class Simulation:
     def __init__(self):
-        self.workers = [
-            Worker(0, 0.5),
-            Worker(1, 0.5)
+        self.piles = [
+            TaskPile(),
+            TaskPile(),
+            TaskPile()
         ]
 
-        self.tasks = [
-            Task(),
-            Task()
+        self.workers = [
+            Worker(0, precision=0.5, in_pile=self.piles[0], out_pile=self.piles[1]),
+            Worker(1, precision=0.5, in_pile=self.piles[1], out_pile=self.piles[2])
         ]
+
+        self.piles[0].put(*[Task() for _ in range(10)])
 
     def run(self):
-        for task in self.tasks:
-            self._process_task(task)
+        for i in range(8):
+            for worker in self.workers:
+                worker.step()
 
-        print(self.tasks)
-
-    def _process_task(self, task):
-        for worker in self.workers:
-            worker._work(task)
+        for task in self.piles[2]:
+            print(task)
