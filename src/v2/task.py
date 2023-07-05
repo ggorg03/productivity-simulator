@@ -14,5 +14,11 @@ class Task:
     def has_outcome(self, stage_id):
         return self.outcomes[stage_id] is not None
 
+    def fully_complete(self) -> bool:
+        for outcome in self.outcomes:
+            if outcome != Task.COMPLETED:
+                return False
+        return True
+
     def __repr__(self):
         return f"<Task #{id(self)} {str(self.outcomes)}>"
