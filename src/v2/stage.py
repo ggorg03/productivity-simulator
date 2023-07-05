@@ -7,8 +7,12 @@ from .worker import Worker
 class Stage:
     def __init__(self,
                  num_workers: int,
+                 speed_distribution: Callable[[], int],
                  precision_distribution: Callable[[], float]):
-        self.workers = [Worker(precision=precision_distribution()) for _ in range(num_workers)]
+        self.workers = [
+            Worker(speed=speed_distribution(), precision=precision_distribution())
+            for _ in range(num_workers)
+        ]
 
     def set_stage_id(self, stage_id: int) -> None:
         for worker in self.workers:

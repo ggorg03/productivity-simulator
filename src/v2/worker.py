@@ -6,17 +6,20 @@ from .task import Task
 
 class Worker:
     def __init__(self,
+                 speed: int = 1,
                  precision: float = 1):
+        self.speed = speed
         self.precision = precision
         self.stage_id: int | None = None
         self.input_pile: TaskPile | None = None
         self.output_pile: TaskPile | None = None
 
     def step(self):
-        task = self.input_pile.get()
-        if task is not None:
-            self._work(task)
-            self.output_pile.put(task)
+        for _ in range(self.speed):
+            task = self.input_pile.get()
+            if task is not None:
+                self._work(task)
+                self.output_pile.put(task)
 
     def _work(self, task: Task) -> None:
         task_outcome = task.get_outcome(self.stage_id)
