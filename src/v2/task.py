@@ -12,9 +12,6 @@ class Task:
     def get_outcome(self, stage_id):
         return self.outcomes[stage_id]
 
-    def has_outcome(self, stage_id):
-        return self.outcomes[stage_id] is not None
-
     def fully_complete(self) -> bool:
         for outcome in self.outcomes:
             if outcome != Task.COMPLETED:
