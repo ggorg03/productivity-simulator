@@ -1,5 +1,6 @@
 from .pile import TaskPile
 from .stage import Stage
+from .task import Task
 
 
 class Pipeline:
@@ -14,6 +15,9 @@ class Pipeline:
         self.stages = stages
         self.input_pile = piles[0]
         self.output_pile = piles[-1]
+
+    def add_tasks(self, num_tasks: int):
+        self.input_pile.put(*[Task(len(self.stages)) for _ in range(num_tasks)])
 
     def step(self):
         for stage in self.stages:

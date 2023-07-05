@@ -10,7 +10,7 @@ class Simulation:
             Stage(num_workers=1, precision_distribution=lambda: 0.5),
         ])
 
-        self.pipeline.input_pile.put(*[Task() for _ in range(10)])
+        self.pipeline.add_tasks(10)
 
     def run(self):
         for i in range(8):

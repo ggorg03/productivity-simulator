@@ -19,6 +19,7 @@ class WorkerTest(unittest.TestCase):
         input_pile.put(task)
 
         worker = Worker()
+        worker.stage_id = 0
         worker.input_pile = input_pile
         worker.output_pile = output_pile
 
@@ -42,7 +43,7 @@ class WorkerTest(unittest.TestCase):
         worker.step()
 
         updated_task = output_pile.get()
-        self.assertEqual(updated_task.get_state(0), Task.COMPLETED)
+        self.assertEqual(updated_task.get_outcome(0), Task.COMPLETED)
 
     def test_step_can_fail_task(self):
         input_pile = TaskPile()
@@ -59,7 +60,7 @@ class WorkerTest(unittest.TestCase):
         worker.step()
 
         updated_task = output_pile.get()
-        self.assertEqual(updated_task.get_state(0), Task.FAILED)
+        self.assertEqual(updated_task.get_outcome(0), Task.FAILED)
 
     def test_step_multiple_times_same_worker(self):
         input_pile = TaskPile()
@@ -79,8 +80,8 @@ class WorkerTest(unittest.TestCase):
         updated_task1 = output_pile.get()
         updated_task2 = output_pile.get()
 
-        self.assertEqual(updated_task1.get_state(0), Task.COMPLETED)
-        self.assertEqual(updated_task2.get_state(0), Task.COMPLETED)
+        self.assertEqual(updated_task1.get_outcome(0), Task.COMPLETED)
+        self.assertEqual(updated_task2.get_outcome(0), Task.COMPLETED)
 
     def test_step_multiple_workers(self):
         input_pile = TaskPile()
@@ -104,8 +105,8 @@ class WorkerTest(unittest.TestCase):
 
         task = output_pile.get()
 
-        self.assertEqual(task.get_state(0), Task.COMPLETED)
-        self.assertEqual(task.get_state(1), Task.COMPLETED)
+        self.assertEqual(task.get_outcome(0), Task.COMPLETED)
+        self.assertEqual(task.get_outcome(1), Task.COMPLETED)
 
 
 if __name__ == '__main__':

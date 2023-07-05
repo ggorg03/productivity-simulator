@@ -19,7 +19,7 @@ class Worker:
             self.output_pile.put(task)
 
     def _work(self, task: Task) -> None:
-        task.set_state(self.stage_id, self._get_work_output())
+        task.set_outcome(self.stage_id, self._get_work_output())
 
     def _get_work_output(self):
         if random.random() < self.precision:
