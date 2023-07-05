@@ -8,7 +8,7 @@ if __name__ == "__main__":
         Stage(num_workers=1, speed_distribution=lambda: 2, precision_distribution=lambda: 0.5),
     ])
 
-    pipeline.add_tasks(10)
+    pipeline.add_tasks(100)
 
     simulation = Simulation(pipeline)
     simulation.run(50)
