@@ -8,12 +8,12 @@ class Worker:
     def __init__(self,
                  stage_id,
                  precision: float = 1,
-                 in_pile: TaskPile = TaskPile(),
-                 out_pile: TaskPile = TaskPile()):
+                 input_pile: TaskPile = TaskPile(),
+                 output_pile: TaskPile = TaskPile()):
         self.stage_id = stage_id
         self.precision = precision
-        self.input_pile = in_pile
-        self.output_pile = out_pile
+        self.input_pile = input_pile
+        self.output_pile = output_pile
 
     def step(self):
         task = self.input_pile.get()

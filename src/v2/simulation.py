@@ -12,8 +12,8 @@ class Simulation:
         ]
 
         self.workers = [
-            Worker(0, precision=0.5, in_pile=self.piles[0], out_pile=self.piles[1]),
-            Worker(1, precision=0.5, in_pile=self.piles[1], out_pile=self.piles[2])
+            Worker(0, precision=0.5, input_pile=self.piles[0], output_pile=self.piles[1]),
+            Worker(1, precision=0.5, input_pile=self.piles[1], output_pile=self.piles[2])
         ]
 
         self.piles[0].put(*[Task() for _ in range(10)])

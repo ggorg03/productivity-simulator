@@ -18,7 +18,7 @@ class WorkerTest(unittest.TestCase):
 
         input_pile.put(task)
 
-        worker = Worker(0, in_pile=input_pile, out_pile=output_pile)
+        worker = Worker(0, input_pile=input_pile, output_pile=output_pile)
 
         worker.step()
 
@@ -32,7 +32,7 @@ class WorkerTest(unittest.TestCase):
 
         input_pile.put(task)
 
-        worker = Worker(0, precision=1, in_pile=input_pile, out_pile=output_pile)
+        worker = Worker(0, precision=1, input_pile=input_pile, output_pile=output_pile)
 
         worker.step()
 
@@ -46,7 +46,7 @@ class WorkerTest(unittest.TestCase):
 
         input_pile.put(task)
 
-        worker = Worker(0, precision=0, in_pile=input_pile, out_pile=output_pile)
+        worker = Worker(0, precision=0, input_pile=input_pile, output_pile=output_pile)
 
         worker.step()
 
@@ -60,7 +60,7 @@ class WorkerTest(unittest.TestCase):
         input_pile.put(Task())
         input_pile.put(Task())
 
-        worker = Worker(0, precision=1, in_pile=input_pile, out_pile=output_pile)
+        worker = Worker(0, precision=1, input_pile=input_pile, output_pile=output_pile)
 
         worker.step()
         worker.step()
@@ -78,8 +78,8 @@ class WorkerTest(unittest.TestCase):
 
         input_pile.put(Task())
 
-        worker1 = Worker(0, precision=1, in_pile=input_pile, out_pile=transport_pile)
-        worker2 = Worker(1, precision=1, in_pile=transport_pile, out_pile=output_pile)
+        worker1 = Worker(0, precision=1, input_pile=input_pile, output_pile=transport_pile)
+        worker2 = Worker(1, precision=1, input_pile=transport_pile, output_pile=output_pile)
 
         worker1.step()
         worker2.step()
