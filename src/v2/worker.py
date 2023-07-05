@@ -7,18 +7,17 @@ from .task import Task
 class Worker:
     def __init__(self,
                  stage_id: int,
-                 precision: float = 1,
-                 input_pile: TaskPile = TaskPile(),
-                 output_pile: TaskPile = TaskPile()):
+                 precision: float = 1):
         self.stage_id = stage_id
         self.precision = precision
-        self.input_pile = input_pile
-        self.output_pile = output_pile
+        self.input_pile: TaskPile | None = None
+        self.output_pile: TaskPile | None = None
 
     def step(self):
         task = self.input_pile.get()
-        self._work(task)
-        self.output_pile.put(task)
+        if task:
+            self._work(task)
+            self.output_pile.put(task)
 
     def _work(self, task: Task) -> None:
         task.set_state(self.stage_id, self._get_work_output())
