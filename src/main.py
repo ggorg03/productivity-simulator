@@ -6,9 +6,7 @@ if __name__ == "__main__":
     pipeline = Pipeline([
         Stage(num_workers=1, speed_distribution=lambda: 2, precision_distribution=lambda: 0.5),
         Stage(num_workers=1, speed_distribution=lambda: 2, precision_distribution=lambda: 0.5),
-    ])
-
-    pipeline.add_tasks(100)
+    ], 100)
 
     simulation = Simulation(pipeline)
-    simulation.run(50)
+    simulation.run(200)

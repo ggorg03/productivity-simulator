@@ -5,7 +5,7 @@ from .task import Task
 
 
 class Pipeline:
-    def __init__(self, stages: list[Stage]):
+    def __init__(self, stages: list[Stage], num_tasks: int):
         piles = [TaskPile() for _ in range(len(stages) + 1)]
 
         for i in range(len(stages)):
@@ -24,11 +24,18 @@ class Pipeline:
             failed_pile=self.input_pile
         )
 
-    def add_tasks(self, num_tasks: int):
-        self.input_pile.put(*[Task(len(self.stages)) for _ in range(num_tasks)])
+        self.tasks = [Task(len(self.stages)) for _ in range(num_tasks)]
+        self.input_pile.put(*self.tasks)
 
     def step(self):
         for stage in self.stages:
             stage.step()
 
         self.sentinel.step()
+
+    def success_count(self):
+        count = 0
+        for task in self.tasks:
+            if task.fully_complete():
+                count += 1
+        return count
