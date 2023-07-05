@@ -16,15 +16,15 @@ class Simulation:
         self.stages = [
             Stage(stage_id=0,
                   num_workers=1,
-                  precision_distribution=lambda: 0.5,
-                  input_pile=self.piles[0],
-                  output_pile=self.piles[1]),
+                  precision_distribution=lambda: 0.5),
             Stage(stage_id=1,
                   num_workers=1,
-                  precision_distribution=lambda: 0.5,
-                  input_pile=self.piles[1],
-                  output_pile=self.piles[2]),
+                  precision_distribution=lambda: 0.5),
         ]
+
+        for i in range(len(self.stages)):
+            self.stages[i].set_input_pile(self.piles[i])
+            self.stages[i].set_output_pile(self.piles[i+1])
 
         self.piles[0].put(*[Task() for _ in range(10)])
 
