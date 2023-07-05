@@ -14,10 +14,10 @@ class StageTest(unittest.TestCase):
         input_pile.put(task)
 
         stage = Stage(
-            stage_id=0,
             num_workers=1,
             precision_distribution=lambda: 0.5)
 
+        stage.set_stage_id(0)
         stage.set_input_pile(input_pile)
         stage.set_output_pile(output_pile)
 

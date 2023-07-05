@@ -18,7 +18,7 @@ class WorkerTest(unittest.TestCase):
 
         input_pile.put(task)
 
-        worker = Worker(0)
+        worker = Worker()
         worker.input_pile = input_pile
         worker.output_pile = output_pile
 
@@ -34,7 +34,8 @@ class WorkerTest(unittest.TestCase):
 
         input_pile.put(task)
 
-        worker = Worker(0, precision=1)
+        worker = Worker(precision=1)
+        worker.stage_id = 0
         worker.input_pile = input_pile
         worker.output_pile = output_pile
 
@@ -50,7 +51,8 @@ class WorkerTest(unittest.TestCase):
 
         input_pile.put(task)
 
-        worker = Worker(0, precision=0)
+        worker = Worker(precision=0)
+        worker.stage_id = 0
         worker.input_pile = input_pile
         worker.output_pile = output_pile
 
@@ -66,7 +68,8 @@ class WorkerTest(unittest.TestCase):
         input_pile.put(Task())
         input_pile.put(Task())
 
-        worker = Worker(0, precision=1)
+        worker = Worker(precision=1)
+        worker.stage_id = 0
         worker.input_pile = input_pile
         worker.output_pile = output_pile
 
@@ -86,11 +89,13 @@ class WorkerTest(unittest.TestCase):
 
         input_pile.put(Task())
 
-        worker1 = Worker(0, precision=1)
-        worker2 = Worker(1, precision=1)
-
+        worker1 = Worker(precision=1)
+        worker1.stage_id = 0
         worker1.input_pile = input_pile
         worker1.output_pile = transport_pile
+
+        worker2 = Worker(precision=1)
+        worker2.stage_id = 1
         worker2.input_pile = transport_pile
         worker2.output_pile = output_pile
 

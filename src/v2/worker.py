@@ -6,10 +6,9 @@ from .task import Task
 
 class Worker:
     def __init__(self,
-                 stage_id: int,
                  precision: float = 1):
-        self.stage_id = stage_id
         self.precision = precision
+        self.stage_id: int | None = None
         self.input_pile: TaskPile | None = None
         self.output_pile: TaskPile | None = None
 
