@@ -14,7 +14,7 @@ class Worker:
 
     def step(self):
         task = self.input_pile.get()
-        if task:
+        if task is not None:
             self._work(task)
             self.output_pile.put(task)
 

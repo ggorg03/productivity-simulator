@@ -2,4 +2,4 @@ from v2.simulation import Simulation
 
 if __name__ == "__main__":
     simulation = Simulation()
-    simulation.run()
+    simulation.run(50)

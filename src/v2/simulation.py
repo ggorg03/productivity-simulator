@@ -12,9 +12,8 @@ class Simulation:
 
         self.pipeline.add_tasks(10)
 
-    def run(self):
-        for i in range(8):
+    def run(self, step_count: int):
+        for i in range(step_count):
             self.pipeline.step()
 
-        for task in self.pipeline.output_pile:
-            print(task)
+        print(self.pipeline.sentinel.success_count)
