@@ -3,6 +3,7 @@ class Task:
     COMPLETED = "Completed"
 
     def __init__(self, num_stages: int = 2):
+        self.tries = 0
         self.outcomes = [None for _ in range(num_stages)]
 
     def set_outcome(self, stage_id, state):

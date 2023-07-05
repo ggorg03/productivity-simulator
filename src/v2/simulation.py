@@ -9,4 +9,4 @@ class Simulation:
         for i in range(step_count):
             self.pipeline.step()
 
-        print(self.pipeline.sentinel.success_count)
+        print(len(self.pipeline.success_pile))

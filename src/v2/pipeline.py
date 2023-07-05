@@ -16,8 +16,13 @@ class Pipeline:
         self.stages = stages
         self.input_pile = piles[0]
         self.output_pile = piles[-1]
+        self.success_pile = TaskPile()
 
-        self.sentinel = Sentinel(result_pile=self.output_pile, failed_pile=self.input_pile)
+        self.sentinel = Sentinel(
+            result_pile=self.output_pile,
+            success_pile=self.success_pile,
+            failed_pile=self.input_pile
+        )
 
     def add_tasks(self, num_tasks: int):
         self.input_pile.put(*[Task(len(self.stages)) for _ in range(num_tasks)])

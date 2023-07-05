@@ -16,5 +16,5 @@ class TaskPile:
         except IndexError:
             return None
 
-    def __iter__(self):
-        return iter(self.tasks)
+    def __len__(self) -> int:
+        return len(self.tasks)

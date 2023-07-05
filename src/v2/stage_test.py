@@ -15,6 +15,7 @@ class StageTest(unittest.TestCase):
 
         stage = Stage(
             num_workers=1,
+            speed_distribution=lambda: 1,
             precision_distribution=lambda: 0.5)
 
         stage.set_stage_id(0)
