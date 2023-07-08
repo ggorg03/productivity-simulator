@@ -24,7 +24,7 @@ class Pipeline:
             failed_pile=self.input_pile
         )
 
-        self.tasks = [Task(len(self.stages)) for _ in range(num_tasks)]
+        self.tasks = [Task(task_id=i + 1, num_stages=len(self.stages)) for i in range(num_tasks)]
         self.input_pile.put(*self.tasks)
 
     def step(self):

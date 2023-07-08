@@ -18,5 +18,6 @@ class Sentinel:
 
             if task.fully_complete():
                 self.success_pile.put(task)
+                task.set_out_pipeline()
             else:
                 self.failed_pile.put(task)
