@@ -1,32 +1,39 @@
 from v2.pipeline import Pipeline
 from v2.stage import Stage
 from v2.simulation import Simulation
+from v2.tasks_recorder import TasksRecorder
 
 import pandas as pd
+from tqdm import tqdm
 
 if __name__ == "__main__":
-    dataset = {
-        "total_tasks": [],
-        "completed_tasks": []
+    task_count = 100
+    total_steps = 100
+    
+    groups = {
+        'precision_group': {'speed': 3, 'precision': 0.85},
+        'speed_group': {'speed': 6, 'precision': 0.7},
+        'control_group': {'speed': 3, 'precision': 0.7}
     }
 
-    task_count = 10000
-    total_steps = 1000
+    for group, attributes in groups.items():
+        tasks_recorder = TasksRecorder()
+        
+        for i in tqdm (range(0, 100), desc=f'{group}'):
+            pipeline = Pipeline([
+                Stage(num_workers=1,
+                      speed_distribution=lambda: attributes['speed'],
+                      precision_distribution=lambda: attributes['precision']
+                ),Stage(num_workers=1,
+                      speed_distribution=lambda: attributes['speed'],
+                      precision_distribution=lambda: attributes['precision']
+                ),Stage(num_workers=1,
+                      speed_distribution=lambda: attributes['speed'],
+                      precision_distribution=lambda: attributes['precision']
+                )
+            ], task_count)
 
-    for _ in range(0, 100):
-        pipeline = Pipeline([
-            Stage(num_workers=5, speed_distribution=lambda: 1, precision_distribution=lambda: 0.9),
-            Stage(num_workers=5, speed_distribution=lambda: 1, precision_distribution=lambda: 0.9),
-            Stage(num_workers=5, speed_distribution=lambda: 1, precision_distribution=lambda: 0.9),
-            Stage(num_workers=5, speed_distribution=lambda: 1, precision_distribution=lambda: 0.9)
-        ], task_count)
-
-        simulation = Simulation(pipeline)
-        completed_count = simulation.run(total_steps)
-
-        dataset["total_tasks"].append(task_count)
-        dataset["completed_tasks"].append(completed_count)
-
-    dataset = pd.DataFrame.from_dict(dataset)
-
-    dataset.to_csv('results.csv')
+            simulation = Simulation(id=i+1, pipeline=pipeline)
+            simulation.run(total_steps)
+        
+        tasks_recorder.save_record('../samples', group)

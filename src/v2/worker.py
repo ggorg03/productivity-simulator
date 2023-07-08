@@ -2,6 +2,7 @@ import random
 
 from .pile import TaskPile
 from .task import Task
+from .tasks_recorder import TasksRecorder
 
 
 class Worker:
@@ -13,13 +14,14 @@ class Worker:
         self.stage_id: int | None = None
         self.input_pile: TaskPile | None = None
         self.output_pile: TaskPile | None = None
+        self.tasks_recorder = TasksRecorder()
 
     def step(self):
         for _ in range(self.speed):
             task = self.input_pile.get()
             if task is not None:
                 self._work(task)
-                self.output_pile.put(task)
+                self.output_pile.put_on_top(task)
 
     def _work(self, task: Task) -> None:
         task_outcome = task.get_outcome(self.stage_id)
@@ -31,6 +33,7 @@ class Worker:
             self._remove_next_outcomes(task)
 
         task.set_outcome(self.stage_id, self._get_work_output())
+        self.tasks_recorder.record(task)
 
     def _get_work_output(self):
         if random.random() < self.precision:
