@@ -9,6 +9,9 @@ class TaskPile:
 
     def put(self, *tasks: Task) -> None:
         self.tasks.extend(tasks)
+    
+    def put_on_top(self, *tasks: Task) -> None:
+        self.tasks.extendleft(tasks)
 
     def get(self) -> Task | None:
         try:
